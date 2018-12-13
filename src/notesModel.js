@@ -2,7 +2,7 @@
 
   function NotesModel(text) {
     this.text = text;
-    this.shortenedText = this.shortenedText();
+    // this.shortenedText = this.text.substring(0, 20);
   }
 
   NotesModel.prototype = {

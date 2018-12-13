@@ -3,9 +3,14 @@
   window.onload = function() {
 
     var notesModel = NotesModel;
-    var notesView = new NotesView();
+    var notesList = new NotesList;
+    var notesView = NotesView;
 
-    var controller = new NotesController(notesView, notesModel);
+    var controller = new NotesController(
+      notesModel,
+      notesList,
+      notesView
+    );
 
     controller.updateDOM();
   }

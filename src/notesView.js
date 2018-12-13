@@ -1,25 +1,20 @@
-(function(exports) {
+var NotesView = (function() {
 
-  function NotesView() {
-    this.notes = [];
-  }
+  var heading = Heading;
+  var form = Form;
 
-  NotesView.prototype = {
-    renderApp: function() {
-      return [
-        "<h1>Single Page Notes App</h1>",
-        "<form>",
-          "<input type='text'></input>",
-          "<input type='submit'></input>",
-        "</form>",
-        this.notes.map(function(note) { return "<p>"+ note.shortenedText +"<p>" }).join("")
-      ].join("");
+  return {
+    renderHeading: function() {
+      return heading.getHeading();
     },
 
-    addNote: function(note) {
-      this.notes.push(note);
+    renderForm: function() {
+      return form.getForm();
+    },
+
+    renderNotes: function(notes) {
+      return notes.map(function(note) { return "<p>"+ note +"<p>" }).join("");
     }
   }
 
-  exports.NotesView = NotesView;
 })(this);

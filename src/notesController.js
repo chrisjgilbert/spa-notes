@@ -1,25 +1,29 @@
 (function(exports) {
 
-  function NotesController(notesView, notesModel) {
-    this.notesView = notesView;
+  function NotesController(notesModel, notesList, notesView) {
     this.notesModel = notesModel;
-    this._listenForInput();
+    this.notesList = notesList;
+    this.notesView = notesView;
   }
 
   NotesController.prototype = {
     updateDOM: function() {
-      document.getElementById("app").innerHTML = this.notesView.renderApp();
+      this._refreshPage();
+      // this._listenForSubmit();
     },
 
-    _listenForInput: function() {
-      var self = this;
-      window.addEventListener("submit", function(event) {
+    _listenForSubmit: function() {
+      document.getElementById('submit').addEventListener('click', function(event) {
         event.preventDefault();
-        var note = new self.notesModel(event.target[0].value);
-        self.notesView.addNote(note);
-        self.updateDOM();
+        submitNote();
       })
-    }
+    },
+
+    _refreshPage: function() {
+      document.getElementById('heading').innerHTML = this.notesView.renderHeading();
+      document.getElementById('form').innerHTML = this.notesView.renderForm();
+      document.getElementById('notes').innerHTML = this.notesView.renderNotes(this.notesList.list);
+    },
   }
 
   exports.NotesController = NotesController;
