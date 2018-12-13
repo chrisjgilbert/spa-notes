@@ -12,7 +12,7 @@
           "<input type='text'></input>",
           "<input type='submit'></input>",
         "</form>",
-        this.notes.map(function(note) { return "<p>"+ note.text +"<p>" }).join("")
+        this.notes.map(function(note) { return "<p>"+ note.shortenedText +"<p>" }).join("")
       ].join("");
     },
 
