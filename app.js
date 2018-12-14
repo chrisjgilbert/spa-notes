@@ -1,18 +1,12 @@
-(function() {
+window.addEventListener("load", function() {
 
-  window.onload = function() {
+  var notesModelList = new NotesModelList(NotesModel)
 
-    var notesModel = NotesModel;
-    var notesList = new NotesList;
-    var notesView = NotesView;
+  var notesListView = new NotesListView(notesModelList);
 
-    var controller = new NotesController(
-      notesModel,
-      notesList,
-      notesView
-    );
+  var notesController = new NotesController(notesModelList, notesListView, NotesView);
 
-    controller.updateDOM();
-  }
+  var html = notesListView.render();
+  notesController.render(html);
 
-})(this);
+})

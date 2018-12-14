@@ -1,30 +1,25 @@
-(function(exports) {
+function NotesController(notesList, notesListView, notesView) {
+  this.notesList = notesList;
+  this.notesListView = notesListView;
+  this.NotesView = notesView;
 
-  function NotesController(notesModel, notesList, notesView) {
-    this.notesModel = notesModel;
-    this.notesList = notesList;
-    this.notesView = notesView;
+  this._setup();
+}
+
+NotesController.prototype = {
+
+  _setup: function() {
+    var self = this;
+    window.addEventListener('submit', function(event) {
+      event.preventDefault();
+      self.notesList.createNote(event.target[0].value);
+      var html = self.notesListView.render();
+      self.render(html);
+    })
+  },
+
+  render: function(html) {
+    document.getElementById('app').innerHTML = html;
   }
 
-  NotesController.prototype = {
-    updateDOM: function() {
-      this._refreshPage();
-      // this._listenForSubmit();
-    },
-
-    _listenForSubmit: function() {
-      document.getElementById('submit').addEventListener('click', function(event) {
-        event.preventDefault();
-        submitNote();
-      })
-    },
-
-    _refreshPage: function() {
-      document.getElementById('heading').innerHTML = this.notesView.renderHeading();
-      document.getElementById('form').innerHTML = this.notesView.renderForm();
-      document.getElementById('notes').innerHTML = this.notesView.renderNotes(this.notesList.list);
-    },
-  }
-
-  exports.NotesController = NotesController;
-})(this);
+}
